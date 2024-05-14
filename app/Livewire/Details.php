@@ -2,17 +2,22 @@
 
 namespace App\Livewire;
 
+use App\Models\Property;
 use Livewire\Component;
 
 class Details extends Component
 {
-    public $id; // Define a public property to hold the ID
+    public string $slug; // Define a public property to hold the ID
 
     public function render()
     {
-        // dd($this->id);   
+        $property = Property::where([
+            'slug' => $this->slug
+        ])->get()->first();
 
-        return view('livewire.details')
+        return view('livewire.details', [
+            'property' => $property
+        ])
             ->layout('components.layouts.detail_layout');
     }
 }

@@ -19,4 +19,4 @@ Route::get('/properties', Properties::class)->name('properties');
 
 Route::get('/contact', Contact::class)->name('contact');
 
-Route::get('/detail/{id}', Details::class)->name('detail/{id}');
+Route::get('/detail/{slug}', Details::class)->name('detail/{slug}');

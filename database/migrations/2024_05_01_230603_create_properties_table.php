@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('status');
             $table->longText('address');
             $table->string('city');
-            $table->string('state');
+            $table->foreignId('state')->constrained('states');
             $table->integer('price');
             $table->string('square_footing')->nullable();
             $table->integer('no_of_bedroom')->nullable();

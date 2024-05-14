@@ -3,8 +3,10 @@
 namespace Database\Factories;
 
 use App\Models\Agent;
-use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\LocalGovernmentArea;
+use App\Models\State;
 use League\CommonMark\Normalizer\SlugNormalizer;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Property>
@@ -23,14 +25,19 @@ class PropertyFactory extends Factory
         $slug = $slug->normalize($random);
 
         $listing_type = $this->faker->randomElement(['Sale', 'Rent']);
+        $status = $this->faker->randomElement(['available', 'sold']);
+
+        $state = State::pluck('name', 'name');
         return [
             'slug' => $slug,
             'agent_id' => Agent::class,
             'listing_type' => $listing_type,
-            'status' => '',
+            'status' => $status,
             'address' => $this->faker->address(),
-            'city' => $this->faker->city(),
-            'state' => $this->faker->state(),
+            'city' => LocalGovernmentArea::where([
+                'state_id' => $state->id
+            ]),
+            'state' => $state,
             'price' => $this->faker->numberBetween(1000, 99999),
             'square_footing' => $this->faker->numberBetween(233, 5555),
             'no_of_bedroom' => $this->faker->numberBetween(0, 10),

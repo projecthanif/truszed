@@ -25,28 +25,37 @@
     <!-- details images -->
     <!-- Gallery -->
     <div class="row">
-        <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-            <img src="{{ asset('images/img_5.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"
-                alt="Boat on Calm Water" />
+        @php
+            $images = $property->property_thumbnail;
+        @endphp
+        @foreach($images as $image)
+            <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                <img src="{{ asset($image ?? 'images/img_5.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"
+                     alt="Boat on Calm Water"/>
+            </div>
+        @endforeach
+        {{--        <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">--}}
+        {{--            <img src="{{ asset('images/img_5.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"--}}
+        {{--                alt="Boat on Calm Water" />--}}
 
-            <img src="{{ asset('images/img_6.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"
-                alt="Wintry Mountain Landscape" />
-        </div>
+        {{--            <img src="{{ asset('images/img_6.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"--}}
+        {{--                alt="Wintry Mountain Landscape" />--}}
+        {{--        </div>--}}
 
-        <div class="col-lg-4 mb-4 mb-lg-0">
-            <img src="{{ asset('images/img_7.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"
-                alt="Mountains in the Clouds" />
+        {{--        <div class="col-lg-4 mb-4 mb-lg-0">--}}
+        {{--            <img src="{{ asset('images/img_7.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"--}}
+        {{--                alt="Mountains in the Clouds" />--}}
 
-            <img src="{{ asset('images/img_8.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"
-                alt="Boat on Calm Water" />
-        </div>
+        {{--            <img src="{{ asset('images/img_8.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"--}}
+        {{--                alt="Boat on Calm Water" />--}}
+        {{--        </div>--}}
 
-        <div class="col-lg-4 mb-4 mb-lg-0">
-            <img src="{{ asset('images/img_5.jpg') }}" class="w-100 shadow-1-strong rounded mb-4" alt="Waves at Sea" />
+        {{--        <div class="col-lg-4 mb-4 mb-lg-0">--}}
+        {{--            <img src="{{ asset('images/img_5.jpg') }}" class="w-100 shadow-1-strong rounded mb-4" alt="Waves at Sea" />--}}
 
-            <img src="{{ asset('images/img_5.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"
-                alt="Yosemite National Park" />
-        </div>
+        {{--            <img src="{{ asset('images/img_5.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"--}}
+        {{--                alt="Yosemite National Park" />--}}
+        {{--        </div>--}}
     </div>
 
     <!-- Gallery -->
@@ -58,30 +67,21 @@
         <div class="property-item">
 
             <div class="property-content">
-                <div class="price mb-2"><span> &#8358;1,291,000</span></div>
+                <div class="price mb-2"><span> &#8358; {{number_format($property->price, 3)}}</span></div>
                 <div>
-                    <span class="city d-block mb-3">Name of property</span>
+                    {{--                    <span class="city d-block mb-3">Name of property</span>--}}
                     <span class="d-block mb-2 text-black-50">(Here the full details of the property)</span>
-                    <span class="icon-home me-2"></span>
-                    <span class="caption">3 rooms apartment</span>
-                    </span>
+                    <span class="icon-bath me-2"></span>
+                    <span class="caption">{{$property->no_of_bedroom}} bed apartment</span>
                     <span class="icon-trello me-2"></span>
-                    <span class="caption">Toliet: 3</span>
-                    </span> <br>
-                    <span class="icon-product-hunt me-2"></span>
-                    <span class="caption">parking: 1</span>
-                    </span>
+                    <span class="caption">Toilet: {{$property->no_of_bathroom}}</span>
+                    <br>
+                    {{--                    <span class="icon-product-hunt me-2"></span>--}}
+                    {{--                    <span class="caption">parking: 1</span>--}}
                     <span class="icon-map-pin me-2"></span>
-                    <span class="caption">land size(sqm): </span>
-                    </span>
-
+                    <span class="caption">land size(sqm): {{$property->square_footing}}</span>
                     <div class="specs d-flex mb-4">
-                        <span class="d-block d-flex align-items-center me-3">
-
-                            {{-- <span class="d-block d-flex align-items-center">
-                                <span class="icon-bath me-2"></span>
-                                <span class="caption">2 baths</span>
-                            </span> --}}
+                        <span class="d-block d-flex align-items-center me-3"> </span>
                     </div>
 
                     <a href="http://wa.me/8039811738" class="btn btn-primary py-2 px-3" @style('border-radius:2px;')>
@@ -98,10 +98,8 @@
             </div>
         </div>
     </center>
-
     <br>
     <br>
-
     <center>
         <ul class="social list-unstyled list-inline dark-hover">
             <li class="list-inline-item">

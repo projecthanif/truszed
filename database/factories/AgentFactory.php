@@ -25,8 +25,8 @@ class AgentFactory extends Factory
             'phone_number' => $this->faker->phoneNumber(),
             'address' => $this->faker->address(),
             'nin' => $this->faker->numberBetween(11111111111, 99999999999),
-            'approve' => $approval,
-            'suspend' => $approval
+            'approve' => $this->faker->boolean(),
+            'suspend' => $this->faker->boolean()
         ];
     }
 }

@@ -14,13 +14,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::factory(10)->create();
 
-        // User::factory()->create([
-        //     'name' => 'Admin',
-        //     'email' => 'admin@admin.com',
-        //     'password' => bcrypt('password')
-        // ]);
+        User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('password')
+        ]);
 
         Agent::factory()->create([
             'name' => 'Admin',
@@ -32,8 +32,10 @@ class DatabaseSeeder extends Seeder
             'suspend' => ''
         ]);
 
-        // $this->call([
-        //     AgentSeeder::class
-        // ]);
+        $this->call([
+            AgentSeeder::class,
+            StateSeeder::class,
+            LocalGovernmentAreaSeeder::class
+        ]);
     }
 }

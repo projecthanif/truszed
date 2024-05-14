@@ -30,4 +30,14 @@ class Property extends Model
     {
         return $this->hasOne(View::class);
     }
+
+    public function state(): BelongsTo
+    {
+        return $this->belongsTo(State::class);
+    }
+
+    public function lga(): BelongsTo
+    {
+        return $this->belongsTo(LocalGovernmentArea::class);
+    }
 }
