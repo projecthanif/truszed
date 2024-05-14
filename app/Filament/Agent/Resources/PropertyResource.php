@@ -29,6 +29,14 @@ class PropertyResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public static function canAccess(): bool
+    {
+        $id = Helpers::search();
+
+        $checkApproval = Agent::find($id)->approve;
+        return $checkApproval === 1;
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -164,7 +172,12 @@ class PropertyResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->query(function () {
+                return Property::where([
+                    'agent_id' => Helpers::search()
+                ]);
+            });
     }
 
     public static function getRelations(): array
