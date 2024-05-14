@@ -29,7 +29,7 @@
                                         </span>
                 </div>
 
-                <a href="/detail/{{$property->slug}}" class="btn btn-primary py-2 px-3">See details</a>
+                <a href="/detail/{{$property->slug}}" class="btn btn-primary py-2 px-3" wire:navigate>See details</a>
             </div>
         </div>
     </div>

@@ -7,7 +7,7 @@
 
                     <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="200">
                         <ol class="breadcrumb text-center justify-content-center">
-                            <li class="breadcrumb-item"><a href="welcome.php">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
                             <li class="breadcrumb-item active text-white-50" aria-current="page">
                                 Details
                             </li>
@@ -28,34 +28,39 @@
         @php
             $images = $property->property_thumbnail;
         @endphp
-        @foreach($images as $image)
+        @if(is_array($images))
+            @foreach($images as $image)
+                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                    <img src="{{ asset($image ?? 'images/img_5.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"
+                         alt="Boat on Calm Water"/>
+                </div>
+            @endforeach
+        @else
             <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                <img src="{{ asset($image ?? 'images/img_5.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"
+                <img src="{{ asset('images/img_5.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"
+                     alt="Boat on Calm Water"/>
+
+                <img src="{{ asset('images/img_6.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"
+                     alt="Wintry Mountain Landscape"/>
+            </div>
+
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <img src="{{ asset('images/img_7.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"
+                     alt="Mountains in the Clouds"/>
+
+                <img src="{{ asset('images/img_8.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"
                      alt="Boat on Calm Water"/>
             </div>
-        @endforeach
-        {{--        <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">--}}
-        {{--            <img src="{{ asset('images/img_5.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"--}}
-        {{--                alt="Boat on Calm Water" />--}}
 
-        {{--            <img src="{{ asset('images/img_6.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"--}}
-        {{--                alt="Wintry Mountain Landscape" />--}}
-        {{--        </div>--}}
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <img src="{{ asset('images/img_5.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"
+                     alt="Waves at Sea"/>
 
-        {{--        <div class="col-lg-4 mb-4 mb-lg-0">--}}
-        {{--            <img src="{{ asset('images/img_7.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"--}}
-        {{--                alt="Mountains in the Clouds" />--}}
+                <img src="{{ asset('images/img_5.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"
+                     alt="Yosemite National Park"/>
+            </div>
+        @endif
 
-        {{--            <img src="{{ asset('images/img_8.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"--}}
-        {{--                alt="Boat on Calm Water" />--}}
-        {{--        </div>--}}
-
-        {{--        <div class="col-lg-4 mb-4 mb-lg-0">--}}
-        {{--            <img src="{{ asset('images/img_5.jpg') }}" class="w-100 shadow-1-strong rounded mb-4" alt="Waves at Sea" />--}}
-
-        {{--            <img src="{{ asset('images/img_5.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"--}}
-        {{--                alt="Yosemite National Park" />--}}
-        {{--        </div>--}}
     </div>
 
     <!-- Gallery -->

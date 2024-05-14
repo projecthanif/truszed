@@ -7,13 +7,15 @@ use Livewire\Component;
 
 class Details extends Component
 {
-    public string $slug; // Define a public property to hold the ID
+    public string $slug; // Define a public property to hold the Slug form the route
 
     public function render()
     {
         $property = Property::where([
             'slug' => $this->slug
         ])->get()->first();
+
+
 
         return view('livewire.details', [
             'property' => $property

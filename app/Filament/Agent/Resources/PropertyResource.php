@@ -1,36 +1,33 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Agent\Resources;
 
+use App\Filament\Agent\Resources\PropertyResource\Pages;
+use App\Filament\Agent\Resources\PropertyResource\RelationManagers;
+use App\Models\Agent;
+use App\Models\LocalGovernmentArea;
+use App\Models\Property;
+use App\Models\State;
 use App\Services\Helpers;
 use App\Services\Slugs;
 use Filament\Forms;
-use Filament\Forms\Components\Select;
-use Filament\Tables;
-use App\Models\Property;
 use Filament\Forms\Form;
-use Filament\Tables\Enums\FiltersLayout;
-use Filament\Tables\Table;
-use Filament\Resources\Resource;
-use Illuminate\Database\Eloquent\Builder;
-use League\CommonMark\Normalizer\SlugNormalizer;
-use App\Filament\Resources\PropertyResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\PropertyResource\RelationManagers;
-use App\Models\Agent;
-use App\Models\LocalGovernmentArea;
-use App\Models\State;
 use Filament\Forms\Get;
-use Filament\Forms\Set;
+use Filament\Resources\Resource;
+use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
-use Illuminate\Support\Facades\Http;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use League\CommonMark\Normalizer\SlugNormalizer;
 
 class PropertyResource extends Resource
 {
     protected static ?string $model = Property::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-home-modern';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
@@ -135,9 +132,6 @@ class PropertyResource extends Resource
                     ->sortable(),
             ])
             ->filters([
-                SelectFilter::make('agent')
-                    ->relationship('agent', 'name')
-                    ->searchable(),
                 SelectFilter::make('State')
                     ->options(State::all()->pluck('name', 'name'))
                     ->searchable(),
@@ -186,7 +180,6 @@ class PropertyResource extends Resource
             'index' => Pages\ListProperties::route('/'),
             'create' => Pages\CreateProperty::route('/create'),
             'edit' => Pages\EditProperty::route('/{record}/edit'),
-            'view' => Pages\ViewProperty::route('/{record}/view'),
         ];
     }
 

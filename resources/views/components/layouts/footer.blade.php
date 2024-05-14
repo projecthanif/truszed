@@ -26,8 +26,8 @@
                 <div class="widget">
                     <h3>Sources</h3>
                     <ul class="list-unstyled float-start links">
-                        <li><a href="about.php">About us</a></li>
-                        <li><a href="#">Services</a></li>
+                        <li><a href="{{route('about')}}">About us</a></li>
+                        <li><a href="{{route('services')}}">Services</a></li>
                         <li><a href="#">Vision</a></li>
                         <li><a href="#">Mission</a></li>
                         <li><a href="#">Terms</a></li>
@@ -76,21 +76,21 @@
         </div>
         <!-- /.row -->
 
-        {{-- <div class="row mt-5">
-            <div class="col-12 text-center">
-                <p>
-                    Copyright &copy;
-                    <script>
-                        document.write(new Date().getFullYear());
-                    </script>
-                    . All Rights Reserved. &mdash;
-                    <a href="https://untree.co" style="color:purple; text-decoration:none; font-weight:bold;">Truszed
-                        Properties</a>
-                    <!-- License information: https://untree.co/license/ -->
-                </p>
+{{--         <div class="row mt-5">--}}
+{{--            <div class="col-12 text-center">--}}
+{{--                <p>--}}
+{{--                    Copyright &copy;--}}
+{{--                    <script>--}}
+{{--                        document.write(new Date().getFullYear());--}}
+{{--                    </script>--}}
+{{--                    . All Rights Reserved. &mdash;--}}
+{{--                    <a href="https://untree.co" style="color:purple; text-decoration:none; font-weight:bold;">Truszed--}}
+{{--                        Properties</a>--}}
+{{--                    <!-- License information: https://untree.co/license/ -->--}}
+{{--                </p>--}}
 
-            </div>
-        </div> --}}
+{{--            </div>--}}
+{{--        </div> --}}
     </div>
     <!-- /.container -->
 </div>
