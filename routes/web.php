@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SignupController;
 use App\Livewire\About;
 use App\Livewire\Contact;
 use App\Livewire\Details;
@@ -20,3 +21,7 @@ Route::get('/properties', Properties::class)->name('properties');
 Route::get('/contact', Contact::class)->name('contact');
 
 Route::get('/detail/{slug}', Details::class)->name('detail/{slug}');
+
+Route::get('signup', [SignupController::class, 'index'])->name('agent.index');
+
+Route::post('signup', [SignupController::class, 'create'])->name('agent.register');

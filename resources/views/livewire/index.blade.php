@@ -199,7 +199,8 @@
             <div class="col-lg-7 mx-auto text-center">
                 <h2 class="mb-4">Be a part of our growing real state agents</h2>
                 <p>
-                    <a href="#" target="_blank" class="btn btn-primary text-white py-3 px-4">Apply for Real
+                    <a href="{{ route('agent.index') }}" target="_blank"
+                        class="btn btn-primary text-white py-3 px-4">Apply for Real
                         Estate agent</a>
                 </p>
             </div>

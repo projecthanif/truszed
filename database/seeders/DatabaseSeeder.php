@@ -28,12 +28,13 @@ class DatabaseSeeder extends Seeder
             'phone_number' => '',
             'address' => '',
             'nin' => '',
+            'nin_thumbnail1' => 'null',
             'approve' => '',
             'suspend' => ''
         ]);
 
         $this->call([
-            AgentSeeder::class,
+            // AgentSeeder::class,
             StateSeeder::class,
             LocalGovernmentAreaSeeder::class
         ]);

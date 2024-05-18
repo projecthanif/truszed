@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('address');
             $table->string('nin');
             $table->string('agent_thumbnail')->nullable();
-            $table->string('nin_thumbnail')->nullable();
+            $table->string('nin_thumbnail1');
+            $table->string('nin_thumbnail2')->nullable();
             $table->boolean('approve')->default(false);
             $table->boolean('suspend')->default(false);
             $table->timestamps();

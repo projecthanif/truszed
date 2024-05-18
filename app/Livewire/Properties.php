@@ -18,6 +18,8 @@ class Properties extends Component
         $admin = User::where([
             'role' => 'admin'
         ])->get('id');
+
+
         return view('livewire.properties', [
             'properties' => $properties,
         ]);
