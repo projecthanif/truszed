@@ -27,13 +27,16 @@ class PropertyResource extends Resource
 {
     protected static ?string $model = Property::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-home-modern';
 
     public static function canAccess(): bool
     {
-        $id = Helpers::search();
+        if (auth()->user()->role !== 'agent') {
+            return true;
+        }
 
-        $checkApproval = Agent::find($id)->approve;
+        $id = Helpers::search();
+        $checkApproval = Agent::find($id)?->approve;
         return $checkApproval === 1;
     }
 
@@ -44,7 +47,7 @@ class PropertyResource extends Resource
                 Forms\Components\Hidden::make('slug')
                     ->default(Slugs::slugComponent()),
                 Forms\Components\Hidden::make('agent_id')
-                    ->default(Helpers::search())
+                    ->default(auth()->user()->id)
                     ->required(),
                 Forms\Components\Select::make('listing_type')
                     ->options([
@@ -121,15 +124,15 @@ class PropertyResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
                     ->money('NGN'),
-//                    ->sortable(),
+                //                    ->sortable(),
                 Tables\Columns\TextColumn::make('square_footing')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('no_of_bedroom')
                     ->numeric(),
-//                    ->sortable(),
+                //                    ->sortable(),
                 Tables\Columns\TextColumn::make('no_of_bathroom')
                     ->numeric(),
-//                    ->sortable(),
+                //                    ->sortable(),
                 Tables\Columns\TextColumn::make('status')
                     ->searchable()
                     ->badge(),
@@ -195,6 +198,4 @@ class PropertyResource extends Resource
             'edit' => Pages\EditProperty::route('/{record}/edit'),
         ];
     }
-
-
 }

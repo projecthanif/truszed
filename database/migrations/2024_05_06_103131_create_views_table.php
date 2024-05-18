@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('views', function (Blueprint $table) {
             $table->id();
             $table->foreignId('property_id')->constrained('properties')->cascadeOnDelete();
-            $table->foreignId('agent_id')->constrained('agents')->cascadeOnDelete();
+            $table->foreignId('agent_id')->constrained('users')->cascadeOnDelete();
             $table->integer('no_of_views')->default(0);
             $table->timestamps();
         });

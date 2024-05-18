@@ -6,7 +6,7 @@ use App\Models\Agent;
 
 class Helpers
 {
-    public static function search(): int
+    public static function search(): ?int
     {
         $userEmail = auth()->user()->email;
 
@@ -14,6 +14,6 @@ class Helpers
             'email' => $userEmail
         ])->get()->first();
 
-        return $id->id;
+        return $id?->id;
     }
 }

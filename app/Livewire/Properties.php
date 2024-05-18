@@ -17,13 +17,22 @@ class Properties extends Component
             'admin_permission' => true
         ])->paginate(12);
 
-        $admin = User::where([
-            'role' => 'admin'
-        ])->get('id');
+        $admin = User::where('role', '!=', 'agent')->get('id');
 
+        $featuredProperties = [];
 
+        foreach ($properties as $property) {
+            foreach ($admin as $key) {
+                if ($property->agent_id === $key->id) {
+                    $featuredProperties[] = $property;
+                }
+            }
+        }
+
+        // dd($featuredProperties);
         return view('livewire.properties', [
             'properties' => $properties,
+            'featuredProperties' => $featuredProperties
         ]);
     }
 }

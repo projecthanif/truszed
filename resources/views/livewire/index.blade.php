@@ -40,24 +40,26 @@
                     </p>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="property-slider-wrap">
-                        <div class="property-slider">
-                            @for ($i = 0; $i < 10; $i++)
-                                @include('components.layouts.propertycard')
-                            @endfor
-                        </div>
+            @if (!empty($featuredProperties))
+                <div class="row">
+                    <div class="col-12">
+                        <div class="property-slider-wrap">
+                            <div class="property-slider">
+                                @foreach ($featuredProperties as $property)
+                                    @include('components.layouts.propertycard')
+                                @endforeach
+                            </div>
 
-                        <div id="property-nav" class="controls" tabindex="0" aria-label="Carousel Navigation">
-                            <span class="prev" data-controls="prev" aria-controls="property"
-                                tabindex="-1">Prev</span>
-                            <span class="next" data-controls="next" aria-controls="property"
-                                tabindex="-1">Next</span>
+                            <div id="property-nav" class="controls" tabindex="0" aria-label="Carousel Navigation">
+                                <span class="prev" data-controls="prev" aria-controls="property"
+                                    tabindex="-1">Prev</span>
+                                <span class="next" data-controls="next" aria-controls="property"
+                                    tabindex="+1">Next</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
     <section class="features-1">

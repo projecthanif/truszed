@@ -1,31 +1,32 @@
-<div class="property-item">
-
-    <a href="property-single.php" class="img">
-        <div class="status-tag">FOR SELL</div>
-        <img src="images/img_1.jpg" alt="Image" class="img-fluid" />
+@php
+    $background = $property->listing_type === 'Sale' ? 'green' : 'red';
+@endphp
+<div class="property-item mb-30">
+    <a href="/detail/{{ $property->slug }}" class="img">
+        <div class="status-tag" @style('background:' . $background)>
+            FOR {{ strtoupper($property->listing_type) }}
+        </div>
+        <img src="{{ $property->property_thumbnail[0] ?? 'images/img_1.jpg' }}" alt="Image" class="img-fluid" />
     </a>
 
     <div class="property-content">
-        <div class="price mb-2"><span> &#8358;{{ number_format('1291000') }}</span></div>
+        <div class="price mb-2"><span> &#8358; {{ number_format($property->price, 3) }}</span></div>
         <div>
-            <span class="d-block mb-2 text-black-50">
-                {{ 'Here the address of the property' }}
-            </span>
-            <span class="city d-block mb-3">{{ 'Name of property' }}</span>
+            <span class="d-block mb-2 text-black-50">{{ $property->address }}</span>
+            <span class="city d-block mb-3">{{ $property->state, $property->city }}</span>
 
             <div class="specs d-flex mb-4">
                 <span class="d-block d-flex align-items-center me-3">
                     <span class="icon-bed me-2"></span>
-                    <span class="caption">{{ '3 room apartment' }}</span>
+                    <span class="caption">{{ $property->no_of_bedroom }} beds</span>
                 </span>
-                {{-- <span class="d-block d-flex align-items-center">
+                <span class="d-block d-flex align-items-center">
                     <span class="icon-bath me-2"></span>
-                    <span class="caption">2 baths</span>
-                </span> --}}
+                    <span class="caption">{{ $property->no_of_bathroom }} baths</span>
+                </span>
             </div>
 
-            <a href="/detail/{{ 1 }}" class="btn btn-primary py-2 px-3" wire:navigate>See details</a>
+            <a href="/detail/{{ $property->slug }}" class="btn btn-primary py-2 px-3" wire:navigate>See details</a>
         </div>
     </div>
 </div>
-<!-- .item -->

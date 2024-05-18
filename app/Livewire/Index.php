@@ -2,15 +2,36 @@
 
 namespace App\Livewire;
 
-use Livewire\Attributes\Layout;
-use Livewire\Attributes\Title;
+use App\Models\User;
 use Livewire\Component;
+use App\Models\Property;
+use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 
 class Index extends Component
 {
     #[Title('truszed &mdash; trust, luxury, life')]
     public function render()
     {
-        return view('livewire.index');
+        $properties = Property::where([
+            'admin_permission' => true
+        ])->paginate(12);
+
+        $admin = User::where('role', '!=', 'agent')->get('id');
+
+        $featuredProperties = [];
+
+        foreach ($properties as $property) {
+            foreach ($admin as $key) {
+                if ($property->agent_id === $key->id) {
+                    $featuredProperties = $property;
+                }
+            }
+        }
+
+        return view('livewire.index', [
+            'properties' => $properties,
+            'featuredProperties' => $featuredProperties
+        ]);
     }
 }

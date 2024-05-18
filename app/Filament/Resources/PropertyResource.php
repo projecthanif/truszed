@@ -58,7 +58,7 @@ class PropertyResource extends Resource
                     ->required(),
                 Forms\Components\Select::make('state')
                     ->live()
-                    ->options(State::all()->pluck('name', 'name'))
+                    ->options(State::all()->pluck('name', 'id'))
                     ->required(),
                 Forms\Components\Select::make('city')
                     ->live()
@@ -66,13 +66,8 @@ class PropertyResource extends Resource
                         $state = $get('state');
 
                         if ($state !== null) {
-                            $stateId = State::where([
-                                'name' => $state
-                            ])->get('id')->first()->id;
-
-
                             return LocalGovernmentArea::where([
-                                'state_id' => $stateId
+                                'state_id' => $state
                             ])->get()->pluck('name', 'name');
                         }
 
