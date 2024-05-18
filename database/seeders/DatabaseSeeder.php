@@ -14,23 +14,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
+        // User::factory(10)->create();
 
         User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
+            'role' => 'admin',
             'password' => bcrypt('password')
-        ]);
-
-        Agent::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'phone_number' => '',
-            'address' => '',
-            'nin' => '',
-            'nin_thumbnail1' => 'null',
-            'approve' => '',
-            'suspend' => ''
         ]);
 
         $this->call([

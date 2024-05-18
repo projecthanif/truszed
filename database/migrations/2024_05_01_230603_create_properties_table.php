@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
             $table->string('slug');
-            $table->foreignId('agent_id')->constrained('agents')->cascadeOnDelete();
+            $table->foreignId('agent_id')->constrained('users')->cascadeOnDelete();
             $table->string('listing_type'); //Sale, Rent,
             $table->string('status');
             $table->longText('address');

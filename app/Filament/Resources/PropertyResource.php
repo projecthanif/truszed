@@ -22,6 +22,7 @@ use App\Models\LocalGovernmentArea;
 use App\Models\State;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
+use Filament\Support\Colors\Color;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Support\Facades\Http;
@@ -32,6 +33,8 @@ class PropertyResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-home-modern';
 
+    protected static ?string $navigationGroup = 'Property';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -39,7 +42,7 @@ class PropertyResource extends Resource
                 Forms\Components\Hidden::make('slug')
                     ->default(Slugs::slugComponent()),
                 Forms\Components\Hidden::make('agent_id')
-                    ->default(Helpers::search())
+                    ->default(auth()->user()->id)
                     ->required(),
                 Forms\Components\Select::make('listing_type')
                     ->options([
@@ -83,20 +86,30 @@ class PropertyResource extends Resource
                     ->required()
                     ->numeric()
                     ->prefix('NGN'),
-                Forms\Components\TextInput::make('square_footing'),
+                Forms\Components\TextInput::make('square_footing')
+                    ->required(),
                 Forms\Components\TextInput::make('no_of_bedroom')
+                    ->required()
                     ->numeric(),
                 Forms\Components\TextInput::make('no_of_bathroom')
+                    ->required()
                     ->numeric(),
-                Forms\Components\DatePicker::make('year_built'),
+                Forms\Components\DatePicker::make('year_built')
+                    ->required(),
                 Forms\Components\FileUpload::make('property_thumbnail')
+                    ->hint('You can insert multiple picture')
+                    ->hintColor(Color::Red)
                     ->multiple()
+                    ->required()
                     ->columnSpanFull(),
                 Forms\Components\Textarea::make('description')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\Hidden::make('admin_permission')
-                    ->default(1)
+                Forms\Components\Toggle::make('admin_permission')
+                    ->visible(function () {
+                        return auth()->user()->role === 'admin';
+                    })
+                    ->default(0)
             ]);
     }
 
@@ -116,23 +129,21 @@ class PropertyResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
                     ->money('NGN'),
-//                    ->sortable(),
+                //                    ->sortable(),
                 Tables\Columns\TextColumn::make('square_footing')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('no_of_bedroom')
                     ->numeric(),
-//                    ->sortable(),
+                //                    ->sortable(),
                 Tables\Columns\TextColumn::make('no_of_bathroom')
                     ->numeric(),
-//                    ->sortable(),
+                //                    ->sortable(),
                 Tables\Columns\TextColumn::make('status')
                     ->searchable()
                     ->badge(),
                 Tables\Columns\TextColumn::make('year_built')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('agent.name')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('user.name'),
             ])
             ->filters([
                 SelectFilter::make('agent')
@@ -187,8 +198,8 @@ class PropertyResource extends Resource
             'create' => Pages\CreateProperty::route('/create'),
             'edit' => Pages\EditProperty::route('/{record}/edit'),
             'view' => Pages\ViewProperty::route('/{record}/view'),
+            'approved' => Pages\ApprovedProperty::route('/approved'),
+            'pending' => Pages\PendingProperty::route('/pending'),
         ];
     }
-
-
 }

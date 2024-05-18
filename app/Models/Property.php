@@ -21,9 +21,9 @@ class Property extends Model
         ];
     }
 
-    public function agent(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(Agent::class);
+        return $this->belongsTo(User::class);
     }
 
     public function views(): HasOne

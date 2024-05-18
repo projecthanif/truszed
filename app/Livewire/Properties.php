@@ -13,7 +13,9 @@ class Properties extends Component
 
     public function render()
     {
-        $properties = \App\Models\Property::paginate(12);
+        $properties = Property::where([
+            'admin_permission' => true
+        ])->paginate(12);
 
         $admin = User::where([
             'role' => 'admin'

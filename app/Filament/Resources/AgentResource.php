@@ -20,6 +20,8 @@ class AgentResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
+    protected static ?string $navigationGroup = 'Agents';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -36,7 +38,10 @@ class AgentResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('nin')
                     ->required(),
-                Forms\Components\FileUpload::make('nin_thumbnail')
+                Forms\Components\FileUpload::make('nin_thumbnail1')
+                    ->imageEditor()
+                    ->columnSpanFull(),
+                Forms\Components\FileUpload::make('nin_thumbnail2')
                     ->imageEditor()
                     ->columnSpanFull(),
                 Forms\Components\FileUpload::make('agent_thumbnail')
@@ -66,7 +71,7 @@ class AgentResource extends Resource
                 Tables\Columns\TextColumn::make('nin')
                     ->label('NIN')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('nin_thumbnail')
+                Tables\Columns\ImageColumn::make('nin_thumbnail1')
                     ->label('NIN Image'),
                 Tables\Columns\IconColumn::make('approve')
                     ->boolean(),
@@ -99,6 +104,9 @@ class AgentResource extends Resource
             'index' => Pages\ListAgents::route('/'),
             'create' => Pages\CreateAgent::route('/create'),
             'edit' => Pages\EditAgent::route('/{record}/edit'),
+            'pending' => Pages\PendingAgent::route('/pending'),
+            'approved' => Pages\ApprovedAgent::route('/approved'),
+            'suspended' => Pages\SuspendedAgent::route('/suspended'),
         ];
     }
 }
