@@ -15,7 +15,7 @@ class Index extends Component
     {
         $properties = Property::where([
             'admin_permission' => true
-        ])->paginate(12);
+        ])->get();
 
         $admin = User::where('role', '!=', 'agent')->get('id');
 
@@ -24,10 +24,12 @@ class Index extends Component
         foreach ($properties as $property) {
             foreach ($admin as $key) {
                 if ($property->agent_id === $key->id) {
-                    $featuredProperties = $property;
+                    $featuredProperties[] = $property;
                 }
             }
         }
+
+//        dd($featuredProperties->slug);
 
         return view('livewire.index', [
             'properties' => $properties,

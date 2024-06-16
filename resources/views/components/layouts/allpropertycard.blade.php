@@ -1,5 +1,5 @@
 @php
-    $background = $property->listing_type === 'Sale' ? 'green' : 'red';
+    $background = $property->listing_type ?? false === 'Sale' ? 'green' : 'red';
 @endphp
 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
     <div class="property-item mb-30">

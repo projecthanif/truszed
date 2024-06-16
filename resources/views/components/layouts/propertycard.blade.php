@@ -1,12 +1,12 @@
 @php
-    $background = $property->listing_type === 'Sale' ? 'green' : 'red';
+        $background = $property->listing_type ?? false === 'Sale' ? 'green' : 'red';
 @endphp
 <div class="property-item mb-30">
     <a href="/detail/{{ $property->slug }}" class="img">
         <div class="status-tag" @style('background:' . $background)>
             FOR {{ strtoupper($property->listing_type) }}
         </div>
-        <img src="{{ $property->property_thumbnail[0] ?? 'images/img_1.jpg' }}" alt="Image" class="img-fluid" />
+        <img src="{{ $property->property_thumbnail[0] ?? 'images/img_1.jpg' }}" alt="Image" class="img-fluid"/>
     </a>
 
     <div class="property-content">

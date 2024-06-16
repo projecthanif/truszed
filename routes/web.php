@@ -7,7 +7,7 @@ use App\Livewire\Details;
 use App\Livewire\Index;
 use App\Livewire\Properties;
 use App\Livewire\Services;
-
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', Index::class);
@@ -25,3 +25,5 @@ Route::get('/detail/{slug}', Details::class)->name('detail/{slug}');
 Route::get('signup', [SignupController::class, 'index'])->name('agent.index');
 
 Route::post('signup', [SignupController::class, 'create'])->name('agent.register');
+
+Route::get('search', [SearchController::class, 'search']);

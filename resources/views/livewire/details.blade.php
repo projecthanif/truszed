@@ -74,15 +74,12 @@
             <div class="property-content">
                 <div class="price mb-2"><span> &#8358; {{number_format($property->price, 3)}}</span></div>
                 <div>
-                    {{--                    <span class="city d-block mb-3">Name of property</span>--}}
-                    <span class="d-block mb-2 text-black-50">(Here the full details of the property)</span>
+                    <span class="d-block mb-2 text-black-50">{{$property->description}}</span>
                     <span class="icon-bath me-2"></span>
                     <span class="caption">{{$property->no_of_bedroom}} bed apartment</span>
                     <span class="icon-trello me-2"></span>
                     <span class="caption">Toilet: {{$property->no_of_bathroom}}</span>
                     <br>
-                    {{--                    <span class="icon-product-hunt me-2"></span>--}}
-                    {{--                    <span class="caption">parking: 1</span>--}}
                     <span class="icon-map-pin me-2"></span>
                     <span class="caption">land size(sqm): {{$property->square_footing}}</span>
                     <div class="specs d-flex mb-4">

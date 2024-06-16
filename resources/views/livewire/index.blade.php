@@ -39,8 +39,8 @@
                         </a>
                     </p>
                 </div>
-            </div>
-            @if (!empty($featuredProperties))
+{{--                {{dd($featuredProperties)}}--}}
+                @if (!empty($featuredProperties))
                 <div class="row">
                     <div class="col-12">
                         <div class="property-slider-wrap">
