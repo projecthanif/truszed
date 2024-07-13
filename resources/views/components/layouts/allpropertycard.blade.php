@@ -8,7 +8,7 @@
                 class="status-tag" @style('background:'.$background)>
                 FOR {{strtoupper($property->listing_type)}}
             </div>
-            <img src="{{ $property->property_thumbnail[0] ?? 'images/img_1.jpg'}}" alt="Image"
+            <img src="/storage/{{ $property->property_thumbnail[0] ?? 'images/img_1.jpg'}}" alt="Image"
                  class="img-fluid"/>
         </a>
 

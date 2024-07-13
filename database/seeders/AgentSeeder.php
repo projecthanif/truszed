@@ -13,14 +13,14 @@ class AgentSeeder extends Seeder
      */
     public function run(): void
     {
-        Agent::factory()
-            ->count(10)
-            ->hasProperty(10)
-            ->create();
+//        Agent::factory()
+//            ->count(10)
+//            ->hasProperty(10)
+//            ->create();
 
-        Agent::factory()
-            ->count(5)
-            ->hasProperty(3)
-            ->create();
+//        Agent::factory()
+//            ->count(5)
+//            ->hasProperty(3)
+//            ->create();
     }
 }

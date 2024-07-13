@@ -16,17 +16,19 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+//        Agent::factory(1)->create();
+
         User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
             'role' => 'admin',
             'password' => bcrypt('password')
         ]);
-
-        $this->call([
-            // AgentSeeder::class,
-            StateSeeder::class,
-            LocalGovernmentAreaSeeder::class
-        ]);
+//
+//        $this->call([
+//            // AgentSeeder::class,
+//            StateSeeder::class,git
+//            LocalGovernmentAreaSeeder::class
+//        ]);
     }
 }

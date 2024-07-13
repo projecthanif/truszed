@@ -14,6 +14,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Resources\Resource;
+use Filament\Support\Colors\Color;
 use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Enums\FiltersLayout;
@@ -63,7 +64,7 @@ class PropertyResource extends Resource
                     ->required(),
                 Forms\Components\Select::make('state')
                     ->live()
-                    ->options(State::all()->pluck('name', 'name'))
+                    ->options(State::all()->pluck('name', 'id'))
                     ->required(),
                 Forms\Components\Select::make('city')
                     ->live()
@@ -71,13 +72,8 @@ class PropertyResource extends Resource
                         $state = $get('state');
 
                         if ($state !== null) {
-                            $stateId = State::where([
-                                'name' => $state
-                            ])->get('id')->first()->id;
-
-
                             return LocalGovernmentArea::where([
-                                'state_id' => $stateId
+                                'state_id' => $state
                             ])->get()->pluck('name', 'name');
                         }
 
@@ -91,20 +87,30 @@ class PropertyResource extends Resource
                     ->required()
                     ->numeric()
                     ->prefix('NGN'),
-                Forms\Components\TextInput::make('square_footing'),
+                Forms\Components\TextInput::make('square_footing')
+                    ->required(),
                 Forms\Components\TextInput::make('no_of_bedroom')
+                    ->required()
                     ->numeric(),
                 Forms\Components\TextInput::make('no_of_bathroom')
+                    ->required()
                     ->numeric(),
-                Forms\Components\DatePicker::make('year_built'),
+                Forms\Components\DatePicker::make('year_built')
+                    ->required(),
                 Forms\Components\FileUpload::make('property_thumbnail')
+                    ->hint('You can insert multiple picture')
+                    ->hintColor(Color::Red)
                     ->multiple()
+                    ->required()
                     ->columnSpanFull(),
                 Forms\Components\Textarea::make('description')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\Hidden::make('admin_permission')
-                    ->default(1)
+                Forms\Components\Toggle::make('admin_permission')
+                    ->visible(function () {
+                        return auth()->user()->role === 'admin';
+                    })
+                    ->default(0)
             ]);
     }
 
@@ -178,7 +184,7 @@ class PropertyResource extends Resource
             ])
             ->query(function () {
                 return Property::where([
-                    'agent_id' => Helpers::search()
+                    'agent_id' => auth()->user()->id
                 ]);
             });
     }

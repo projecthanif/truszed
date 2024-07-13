@@ -26,12 +26,12 @@
     <!-- Gallery -->
     <div class="row">
         @php
-            $images = $property->property_thumbnail;
+                $images = $property->property_thumbnail;
         @endphp
         @if(is_array($images))
             @foreach($images as $image)
                 <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                    <img src="{{ asset($image ?? 'images/img_5.jpg') }}" class="w-100 shadow-1-strong rounded mb-4"
+                    <img src="/storage/agents/{{ asset($image) }}" class="w-100 shadow-1-strong rounded mb-4"
                          alt="Boat on Calm Water"/>
                 </div>
             @endforeach

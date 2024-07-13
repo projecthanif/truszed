@@ -16,12 +16,6 @@ class Details extends Component
             'slug' => $this->slug
         ])->get()->first();
 
-        // View::create([
-        //     'property_id' => $property->id,
-        //     'agent_id' => $property->agent_id,
-        //     'no_of_views' => 1
-        // ]);
-
         return view('livewire.details', [
             'property' => $property
         ])

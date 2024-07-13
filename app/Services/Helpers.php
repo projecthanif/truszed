@@ -14,6 +14,8 @@ class Helpers
             'email' => $userEmail
         ])->get()->first();
 
+
+
         return $id?->id;
     }
 }
