@@ -18,7 +18,7 @@
                         <a href="{{ route('properties') }}" wire:navigate>Properties</a>
                         <ul class="dropdown">
                             <li><a href="#">Buy Property</a></li>
-                            <li><a href="#">Sell Property</a></li>
+                            <li><a href="{{route('agent.register')}}">Sell Property</a></li>
                         </ul>
                     </li>
                     <li class="active"><a href="{{ route('services') }}" wire:navigate.hover>Services</a></li>

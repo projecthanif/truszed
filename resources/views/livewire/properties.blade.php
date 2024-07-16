@@ -28,8 +28,6 @@
                         </h2>
                     </div>
                 </div>
-{{--                {{dd($featuredProperties)}}--}}
-
                 <div class="row">
                     <div class="col-12">
                         <div class="property-slider-wrap">

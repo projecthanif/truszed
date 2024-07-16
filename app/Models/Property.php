@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Property extends Model
@@ -21,13 +21,15 @@ class Property extends Model
         ];
     }
 
-    public function scopeFilter($query, array $filters)
+    public function scopeFilter(Builder $query, array $filters)
     {
         if ($filters['search'] ?? false) {
-            $query->where('address', 'like', '%' . request('search') . '%')
-                ->orWhere('city', 'like', '%' . request('search') . '%')
-                ->orWhere('price', 'like', '%' . request('search') . '.000' . '%')
-                ->orWhere('listing_type', 'like', '%' . request('search') . '%');
+            $searchTerm = $filters['search'];
+            $query->where('address', 'like', '%' . $searchTerm . '%')
+                ->orWhere('state_name', 'like', '%' . $searchTerm . '%')
+                ->orWhere('price', 'like', '%' . $searchTerm . '.000' . '%')
+                ->orWhere('name', 'like', '%' . $searchTerm . '%')
+                ->orWhere('listing_type', 'like', '%' . $searchTerm . '%');
         }
     }
 
@@ -50,5 +52,10 @@ class Property extends Model
     public function lga(): BelongsTo
     {
         return $this->belongsTo(LocalGovernmentArea::class);
+    }
+
+    public function client(): BelongsTo
+    {
+        return $this->belongsTo(Client::class);
     }
 }

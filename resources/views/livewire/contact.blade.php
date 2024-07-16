@@ -73,11 +73,14 @@
             </div>
           </div>
           <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
-            <form action="#">
+            <form action="{{route('contact.request')}}" method="post">
+                @csrf
+                @method('post')
               <div class="row">
                 <div class="col-6 mb-3">
                   <input
                     type="text"
+                    name="name"
                     class="form-control"
                     placeholder="Your Name"
                   />
@@ -85,6 +88,7 @@
                 <div class="col-6 mb-3">
                   <input
                     type="email"
+                    name="email"
                     class="form-control"
                     placeholder="Your Email"
                   />
@@ -92,16 +96,17 @@
                 <div class="col-12 mb-3">
                   <input
                     type="text"
+                    name="subject"
                     class="form-control"
                     placeholder="Subject"
                   />
                 </div>
                 <div class="col-12 mb-3">
                   <textarea
-                    name=""
                     id=""
                     cols="30"
                     rows="7"
+                    name="message"
                     class="form-control"
                     placeholder="Message"
                   ></textarea>

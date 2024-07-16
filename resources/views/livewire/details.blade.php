@@ -26,13 +26,12 @@
     <!-- Gallery -->
     <div class="row">
         @php
-                $images = $property->property_thumbnail;
+            $images = $property->property_thumbnail;
         @endphp
         @if(is_array($images))
             @foreach($images as $image)
                 <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                    <img src="/storage/agents/{{ asset($image) }}" class="w-100 shadow-1-strong rounded mb-4"
-                         alt="Boat on Calm Water"/>
+                    <img src="/storage/{{ $image }}" alt="Boat on Calm Water"  width="600" height="600"/>
                 </div>
             @endforeach
         @else
@@ -86,14 +85,14 @@
                         <span class="d-block d-flex align-items-center me-3"> </span>
                     </div>
 
-                    <a href="http://wa.me/8039811738" class="btn btn-primary py-2 px-3" @style('border-radius:2px;')>
+                    <a href="/property/request/{{$property->slug}}" class="btn btn-primary py-2 px-3" @style('border-radius:2px;')>
                         contact agent
                     </a>
-                    <a href="http://wa.me/8039811738" class="btn btn-primary py-2 px-3" @style('border-radius:2px;')>
+                    <a href="/property/request/{{$property->slug}}" class="btn btn-primary py-2 px-3" @style('border-radius:2px;')>
                         Pay Now
                     </a>
                     <br> <br>
-                    <a href="http://wa.me/8039811738" class="btn btn-primary py-2 px-3" @style('border-radius:2px;')>
+                    <a href="/property/request/{{$property->slug}}" class="btn btn-primary py-2 px-3" @style('border-radius:2px;')>
                         Request a private showing
                     </a>
                 </div>

@@ -1,19 +1,23 @@
 @php
-        $background = $property->listing_type ?? false === 'Sale' ? 'green' : 'red';
+    $background = $property->listing_type ?? false === 'Sale' ? 'green' : 'red';
 @endphp
 <div class="property-item mb-30">
     <a href="/detail/{{ $property->slug }}" class="img">
         <div class="status-tag" @style('background:' . $background)>
             FOR {{ strtoupper($property->listing_type) }}
         </div>
-        <img src="/storage/{{ $property->property_thumbnail[0] ?? 'images/img_1.jpg' }}" alt="Image" class="img-fluid"/>
+        <img src="/storage/{{ $property->property_thumbnail[0] ?? 'images/img_1.jpg' }}" alt="Image"
+             width="350" height="500"/>
     </a>
 
     <div class="property-content">
+        <span class="city d-block mb-3">{{$property->name}}</span>
         <div class="price mb-2"><span> &#8358; {{ number_format($property->price, 3) }}</span></div>
         <div>
             <span class="d-block mb-2 text-black-50">{{ $property->address }}</span>
-            <span class="city d-block mb-3">{{ $property->state, $property->city }}</span>
+            <span class="d-block d-flex align-items-center me-3">
+                    State: {{$property->state_name, $property->city}}
+                </span>
 
             <div class="specs d-flex mb-4">
                 <span class="d-block d-flex align-items-center me-3">

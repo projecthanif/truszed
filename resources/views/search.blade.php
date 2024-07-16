@@ -71,9 +71,15 @@
     <div class="section section-properties" @style('margin-top:40px')>
         <div class="container">
             <div class="row">
-                @foreach ($properties as $property)
-                    @include('components.layouts.allpropertycard')
-                @endforeach
+                @if(count($properties) > 0)
+                    @foreach ($properties as $property)
+                        @include('components.layouts.allpropertycard')
+                    @endforeach
+                @else
+                    <div @style('display:flex;justify-content:center;font-size:20px;font-style:italic;font-weight:bold')>
+                        {{'Record not found'}}
+                    </div>
+                @endif
             </div>
         </div>
     </div>

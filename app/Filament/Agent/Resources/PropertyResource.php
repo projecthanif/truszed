@@ -11,8 +11,10 @@ use App\Models\State;
 use App\Services\Helpers;
 use App\Services\Slugs;
 use Filament\Forms;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Support\Colors\Color;
 use Filament\Tables;
@@ -50,6 +52,9 @@ class PropertyResource extends Resource
                 Forms\Components\Hidden::make('agent_id')
                     ->default(auth()->user()->id)
                     ->required(),
+                Forms\Components\TextInput::make('name')
+                    ->string()
+                    ->required(),
                 Forms\Components\Select::make('listing_type')
                     ->options([
                         'Sale' => 'Sale',
@@ -65,7 +70,13 @@ class PropertyResource extends Resource
                 Forms\Components\Select::make('state')
                     ->live()
                     ->options(State::all()->pluck('name', 'id'))
+                    ->afterStateUpdated(function (?string $state, Set $set) {
+                        $name = State::where('id', $state)->get('name')->first()->name;
+                        $set('state_name', $name);
+                    })
                     ->required(),
+                Hidden::make('state_name')
+                    ->live(),
                 Forms\Components\Select::make('city')
                     ->live()
                     ->options(function (Get $get) {

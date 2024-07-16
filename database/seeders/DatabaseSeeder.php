@@ -25,10 +25,10 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password')
         ]);
 //
-//        $this->call([
-//            // AgentSeeder::class,
-//            StateSeeder::class,git
-//            LocalGovernmentAreaSeeder::class
-//        ]);
+        $this->call([
+            // AgentSeeder::class,
+            StateSeeder::class,
+            LocalGovernmentAreaSeeder::class
+        ]);
     }
 }

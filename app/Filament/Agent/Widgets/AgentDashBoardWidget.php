@@ -39,7 +39,9 @@ class AgentDashBoardWidget extends BaseWidget
                 'listing_type' => 'Rent'
             ])->count();
         }
-        return Property::all()->count();
+        return Property::where([
+            'agent_id' => auth()->user()->id,
+        ])->count();
     }
 
     // private function overview(): int
