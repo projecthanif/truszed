@@ -122,6 +122,7 @@ class PropertyResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id'),
                 ImageColumn::make('property_thumbnail.0')
                     ->square()
                     ->label('Image'),

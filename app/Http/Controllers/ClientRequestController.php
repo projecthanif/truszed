@@ -25,7 +25,7 @@ class ClientRequestController extends Controller
             'agent_id' => '',
             'name' => 'string',
             'email' => 'email',
-            'number' => 'integer',
+            'number' => 'string',
             'comment' => 'nullable'
         ]);
 //        dd($formData);

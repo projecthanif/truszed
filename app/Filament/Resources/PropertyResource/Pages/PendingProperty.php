@@ -102,4 +102,11 @@ class PendingProperty extends ListRecords
                 ]);
             });
     }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return Property::where([
+            'admin_permission' => 0
+        ])->count();
+    }
 }

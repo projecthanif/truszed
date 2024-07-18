@@ -62,4 +62,13 @@ class PendingAgent extends ListRecords
                 ]);
             });
     }
+
+
+    public static function getNavigationBadge(): ?string
+    {
+        return Agent::where([
+            'approve' => 0
+        ])->count();
+    }
+
 }
